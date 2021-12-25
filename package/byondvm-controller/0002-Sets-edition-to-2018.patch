@@ -1,0 +1,25 @@
+From 79073266d572bf8592ee89e3892589112d3d7afe Mon Sep 17 00:00:00 2001
+From: alexkar598 <25136265+alexkar598@users.noreply.github.com>
+Date: Fri, 24 Dec 2021 16:47:17 -0500
+Subject: [PATCH 2/2] Sets edition to 2018
+
+---
+ Cargo.toml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Cargo.toml b/Cargo.toml
+index d9bba0d..ea57897 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -1,7 +1,7 @@
+ [package]
+ name = "dm-playground_controller"
+ version = "0.1.0"
+-edition = "2021"
++edition = "2018"
+ 
+ # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+ 
+-- 
+2.34.1
+

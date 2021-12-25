@@ -1,0 +1,13 @@
+Enable HAVE_KERNEL_UNCOMPRESSED for x86 arch
+
+diff -ruN linux-5.10.83.orig/arch/x86/Kconfig linux-5.10.83/arch/x86/Kconfig
+--- linux-5.10.83.orig/arch/x86/Kconfig 2021-12-01 03:19:10.000000000 -0500
++++ linux-5.10.83/arch/x86/Kconfig      2021-12-24 15:29:19.092993055 -0500
+@@ -189,6 +189,7 @@
+ 	select HAVE_KERNEL_LZ4
+ 	select HAVE_KERNEL_LZMA
+ 	select HAVE_KERNEL_LZO
++	select HAVE_KERNEL_UNCOMPRESSED
+ 	select HAVE_KERNEL_XZ
+ 	select HAVE_KERNEL_ZSTD
+ 	select HAVE_KPROBES
