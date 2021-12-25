@@ -1,3 +1,6 @@
+# dm-playground-linux
+This repo contains the buildroot configuration files to create the iso used in dm playground
+
 1. download buildroot 2021.02.8 and extract to folder, for the sake of these instructions, that folder is <buildroot>/
 2. install buildroot dependencies (its in their documentation)
 3. shove contents of repo in <buildroot>/byondvm
