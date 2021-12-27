@@ -1,20 +1,20 @@
-From 9eea78bb210ca4b0ebf0dc86d9c149dcb4154f28 Mon Sep 17 00:00:00 2001
+From acddc1b125f472270c1df83f54ff96e58ac08046 Mon Sep 17 00:00:00 2001
 From: alexkar598 <25136265+alexkar598@users.noreply.github.com>
 Date: Fri, 24 Dec 2021 16:47:06 -0500
-Subject: [PATCH 1/2] Adds optimizations to the profile
+Subject: Adds optimizations to the profile
 
 ---
  Cargo.toml | 5 +++++
  1 file changed, 5 insertions(+)
 
 diff --git a/Cargo.toml b/Cargo.toml
-index c520e73..d9bba0d 100644
+index c19308e..5aed987 100644
 --- a/Cargo.toml
 +++ b/Cargo.toml
-@@ -13,3 +13,8 @@ subprocess = "0.2"
- tokio = { version = "1", features = ["full"] }
+@@ -14,3 +14,8 @@ tokio = { version = "1", features = ["full"] }
  strum = "0.23"
  strum_macros = "0.23"
+ phf = { version = "0.10", features = ["macros"] }
 +
 +[profile.release]
 +lto = true

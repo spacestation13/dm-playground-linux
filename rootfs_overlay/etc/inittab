@@ -34,7 +34,7 @@ null::sysinit:/bin/setserial /dev/ttyS0 sak
 ::sysinit:/etc/init.d/rcS
 
 #run controller
-ttyS0::once:/usr/bin/controller
+::respawn:/usr/bin/controller
 
 
 # Auto-login as root on ttyS0
