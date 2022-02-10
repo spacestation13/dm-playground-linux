@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-BYONDVM_CONTROLLER_VERSION = 51edd26080309fe6f1fc38b31fc539e885ff4e20
+BYONDVM_CONTROLLER_VERSION = v1.0.0
 BYONDVM_CONTROLLER_SITE = $(call github,spacestation13,dm-playground_controller,$(BYONDVM_CONTROLLER_VERSION))
 BYONDVM_CONTROLLER_LICENSE = ISC
 
