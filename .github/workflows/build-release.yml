@@ -37,14 +37,14 @@ jobs:
         ls -la
         export BR2_EXTERNAL=byondvm
         make defconfig byondvm_defconfig
-        make -j ${{ steps.cpu-cores.outputs.count }}
-        make -j ${{ steps.cpu-cores.outputs.count }}
+        make -j ${{ steps.cpu-cores.outputs.count }} --quiet &>/dev/null
+        make -j ${{ steps.cpu-cores.outputs.count }} --quiet &>/dev/null
   
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v3
       with:
         name: controller.iso
-        path: output/images/controller.iso
+        path: buildroot/output/images/controller.iso
 
     - name: Set current date as env variable
       run: echo HASH::$(git rev-parse HEAD')" >> $GITHUB_ENV
@@ -57,7 +57,7 @@ jobs:
     - name: Create Release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "output/images/controller.iso"
+        artifacts: "buildroot/output/images/controller.iso"
         tag: $HASH
         generateReleaseNotes: true
 
