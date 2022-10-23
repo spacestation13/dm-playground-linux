@@ -49,7 +49,7 @@ jobs:
         path: buildroot/controller.iso
 
     - name: Set current date as env variable
-      run: echo HASH::$(git rev-parse HEAD')" >> $GITHUB_ENV
+      run: echo "HASH::$(git rev-parse HEAD)" >> $GITHUB_ENV
 
     - name: Push tag
       run: |
