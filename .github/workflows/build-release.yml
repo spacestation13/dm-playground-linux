@@ -29,7 +29,7 @@ jobs:
     - name: Setup Buildroot
       run: |
         sudo apt-get update
-        sudo apt-get install -y sed make binutils build-essential diffutils gcc g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc findutils wget
+        sudo apt-get install -y sed make binutils build-essential diffutils gcc gcc-multilib g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc findutils wget
     
     - name: Compile
       run: |
@@ -37,8 +37,8 @@ jobs:
         ls -la
         export BR2_EXTERNAL=byondvm
         make defconfig byondvm_defconfig
-        make -j ${{ steps.cpu-cores.outputs.count }} --quiet &>/dev/null
-        make -j ${{ steps.cpu-cores.outputs.count }} --quiet &>/dev/null
+        make -j ${{ steps.cpu-cores.outputs.count }}
+        make -j ${{ steps.cpu-cores.outputs.count }}
 
         mv output/images/rootfs.iso9660 ./controller.iso
   
