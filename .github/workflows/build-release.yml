@@ -1,0 +1,67 @@
+name: Build & Release ISO
+
+on:
+  push:
+    branches: [ master, actions-test ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        path: byondvm
+
+    - name: Get number of CPU cores
+      uses: SimenB/github-actions-cpu-cores@v1
+      id: cpu-cores
+
+    - name: Download Buildroot
+      run: |
+        wget https://buildroot.org/downloads/buildroot-2022.05.tar.gz
+        tar -xzf ./buildroot-2022.05.tar.gz
+        mv -v ./buildroot-2022.05/ ./buildroot
+        mv -v ./byondvm ./buildroot/byondvm
+
+    - name: Setup Buildroot
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y sed make binutils build-essential diffutils gcc g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc findutils wget
+    
+    - name: Compile
+      run: |
+        cd ./buildroot
+        ls -la
+        export BR2_EXTERNAL=byondvm
+        make defconfig byondvm_defconfig
+        make -j ${{ steps.cpu-cores.outputs.count }}
+        make -j ${{ steps.cpu-cores.outputs.count }}
+  
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v3
+      with:
+        name: controller.iso
+        path: output/images/controller.iso
+
+    - name: Set current date as env variable
+      run: echo HASH::$(git rev-parse HEAD')" >> $GITHUB_ENV
+
+    - name: Push tag
+      run: |
+        git tag $HASH
+        git push origin --tags
+
+    - name: Create Release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "output/images/controller.iso"
+        tag: $HASH
+        generateReleaseNotes: true
+
+
+
+
+    
