@@ -50,7 +50,7 @@ jobs:
         make -j ${{ steps.cpu-cores.outputs.count }}
         make -j ${{ steps.cpu-cores.outputs.count }}
 
-        mv output/images/rootfs.iso9660 ./controller.iso
+        mv ./output/images/rootfs.iso9660 ./controller.iso
   
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v3
@@ -60,13 +60,14 @@ jobs:
 
     - name: Set current date as env variable
       run: |
-        ls -la
-        cd ..
+        cd ./buildroot/byondvm # Go to the actual repo
         ls -la
         echo "HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
     - name: Push tag
       run: |
+        ls -la
+        cd ./buildroot/byondvm # Go to the actual repo
         git tag ${{ env.HASH }}
         git push origin --tags
 
