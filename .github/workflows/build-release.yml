@@ -62,7 +62,7 @@ jobs:
       run: |
         cd ./buildroot/byondvm # Go to the actual repo
         ls -la
-        echo "HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        echo "HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Push tag
       run: |
