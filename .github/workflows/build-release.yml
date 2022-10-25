@@ -2,7 +2,7 @@ name: Build & Release ISO
 
 on:
   push:
-    branches: [ master, actions-test ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -44,12 +44,10 @@ jobs:
     - name: Compile
       run: |
         cd ./buildroot
-        ls -la
         export BR2_EXTERNAL=byondvm
         make defconfig byondvm_defconfig
         make -j ${{ steps.cpu-cores.outputs.count }}
         make -j ${{ steps.cpu-cores.outputs.count }}
-
         mv ./output/images/rootfs.iso9660 ./controller.iso
   
     - name: 'Upload Artifact'
@@ -59,26 +57,22 @@ jobs:
         path: buildroot/controller.iso
 
     - name: Set current date as env variable
+      if: github.event_name == 'push'
       run: |
         cd ./buildroot/byondvm # Go to the actual repo
-        ls -la
         echo "HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Push tag
+      if: github.event_name == 'push'
       run: |
-        ls -la
         cd ./buildroot/byondvm # Go to the actual repo
         git tag ${{ env.HASH }}
         git push origin --tags
 
     - name: Create Release
       uses: ncipollo/release-action@v1
+      if: github.event_name == 'push'
       with:
         artifacts: "buildroot/controller.iso"
         tag: ${{ env.HASH }}
         generateReleaseNotes: true
-
-
-
-
-    
