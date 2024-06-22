@@ -44,7 +44,6 @@ jobs:
         export BR2_EXTERNAL=byondvm
         make defconfig byondvm_defconfig
         make -j ${{ steps.cpu-cores.outputs.count }}
-        make -j ${{ steps.cpu-cores.outputs.count }}
 
     - name: 'Upload Artifact'
       uses: actions/upload-artifact@v4
