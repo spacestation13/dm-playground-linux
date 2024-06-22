@@ -15,11 +15,10 @@
 
 # Startup the system
 ::sysinit:/bin/mount -t proc proc /proc
-::sysinit:/bin/mount -o remount,rw /
 ::sysinit:/bin/mkdir -p /dev/pts /dev/shm
+::sysinit:/bin/mount -t ramfs ramfs /mnt/overlays
+::sysinit:/bin/mkdir /mnt/overlays/root /mnt/overlays/rootw /mnt/overlays/var /mnt/overlays/varw
 ::sysinit:/bin/mount -a
-::sysinit:/bin/mkdir -p /mnt/host
-::sysinit:/bin/mount -t 9p host9p /mnt/host
 
 null::sysinit:/bin/ln -sf /proc/self/fd /dev/fd
 null::sysinit:/bin/ln -sf /proc/self/fd/0 /dev/stdin
