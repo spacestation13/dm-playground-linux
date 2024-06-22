@@ -11,26 +11,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         path: byondvm
         
     - name: Cache Buildroot CCache
       id: cache-ccache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.buildroot-ccache
         key: linux-buildroot-ccache
 
     - name: Get number of CPU cores
-      uses: SimenB/github-actions-cpu-cores@v1
+      uses: SimenB/github-actions-cpu-cores@v2
       id: cpu-cores
 
     - name: Download Buildroot
       run: |
-        wget https://buildroot.org/downloads/buildroot-2022.05.tar.gz
-        tar -xzf ./buildroot-2022.05.tar.gz
-        mv -v ./buildroot-2022.05/ ./buildroot
+        wget https://buildroot.org/downloads/buildroot-2024.02.3.tar.gz
+        tar -xzf ./buildroot-2024.02.3.tar.gz
+        mv -v ./buildroot-2024.02.3/ ./buildroot
         mv -v ./byondvm ./buildroot/byondvm
 
     - name: Setup Buildroot
@@ -45,13 +45,11 @@ jobs:
         make defconfig byondvm_defconfig
         make -j ${{ steps.cpu-cores.outputs.count }}
         make -j ${{ steps.cpu-cores.outputs.count }}
-        mv ./output/images/rootfs.iso9660 ./controller.iso
-  
+
     - name: 'Upload Artifact'
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: controller.iso
-        path: buildroot/controller.iso
+        path: buildroot/output/images/*
 
     - name: Set current date as env variable
       if: github.event_name == 'push'
@@ -70,6 +68,6 @@ jobs:
       uses: ncipollo/release-action@v1
       if: github.event_name == 'push'
       with:
-        artifacts: "buildroot/controller.iso"
+        artifacts: "buildroot/output/images/*"
         tag: ${{ env.HASH }}
         generateReleaseNotes: true

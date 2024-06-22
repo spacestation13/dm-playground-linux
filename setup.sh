@@ -8,7 +8,7 @@ rm ../buildroot -rf
 
 #Download buildroot, extract inside directory, delete tar file, move decompressed directory and remove temp dir
 mkdir temp
-wget https://buildroot.org/downloads/buildroot-2022.05.1.tar.gz -O temp/buildroot.tar.gz
+wget https://buildroot.org/downloads/buildroot-2024.02.3.tar.gz -O temp/buildroot.tar.gz
 tar -xvf temp/buildroot.tar.gz
 rm temp/buildroot.tar.gz
 mv buildroot-* ../buildroot
