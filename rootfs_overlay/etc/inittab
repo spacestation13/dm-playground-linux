@@ -33,9 +33,8 @@ null::sysinit:/bin/setserial /dev/ttyS0 sak
 # now run any rc scripts
 ::sysinit:/etc/init.d/rcS
 
-#run controller
-::respawn:/usr/bin/controller /dev/hvc2
-
-
 # Auto-login as root on hvc0
 ::respawn:/sbin/getty hvc0 38400 xterm -n -l /bin/sh
+
+#run controller
+::respawn:/usr/bin/controller /dev/hvc2
