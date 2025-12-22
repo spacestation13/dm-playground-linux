@@ -3,6 +3,7 @@ config BR2_PACKAGE_BYONDVM_CONTROLLER
 	depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
 	select BR2_PACKAGE_HOST_RUSTC
 	select BR2_PACKAGE_HOST_PKGCONF
+	select BR2_PACKAGE_HOST_LIBCURL
 	help
 	  Controller package for dm-playground
 
