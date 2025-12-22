@@ -6,4 +6,4 @@ config BR2_PACKAGE_BYONDVM_CONTROLLER
 	help
 	  Controller package for dm-playground
 
-	  https://githu.com/spacestation13/dm-playground_controller
+	  https://github.com/spacestation13/dm-playground_controller
