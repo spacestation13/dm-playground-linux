@@ -1,2 +1,4 @@
 source "$BR2_EXTERNAL_BYONDVM_PATH/package/byondvm-controller/Config.in"
 
+select BR2_PACKAGE_LIBCURL
+
