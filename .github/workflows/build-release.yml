@@ -28,9 +28,9 @@ jobs:
 
     - name: Download Buildroot
       run: |
-        wget https://buildroot.org/downloads/buildroot-2024.02.3.tar.gz
-        tar -xzf ./buildroot-2024.02.3.tar.gz
-        mv -v ./buildroot-2024.02.3/ ./buildroot
+        wget https://buildroot.org/downloads/buildroot-2026.02.3.tar.gz
+        tar -xzf ./buildroot-2026.02.3.tar.gz
+        mv -v ./buildroot-2026.02.3/ ./buildroot
         mv -v ./byondvm ./buildroot/byondvm
 
     - name: Setup Buildroot
@@ -39,9 +39,6 @@ jobs:
         sudo apt-get install -y sed make binutils build-essential diffutils gcc gcc-multilib g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc findutils wget
 
     - name: Compile
-      env:
-        # The runner's CMake 4 refuses projects that ask for CMake < 3.5 (buildroot 2024.02's hiredis does).
-        CMAKE_POLICY_VERSION_MINIMUM: '3.5'
       run: |
         cd ./buildroot
         export BR2_EXTERNAL=byondvm
