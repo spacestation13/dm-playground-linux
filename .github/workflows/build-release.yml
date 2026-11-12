@@ -39,6 +39,9 @@ jobs:
         sudo apt-get install -y sed make binutils build-essential diffutils gcc gcc-multilib g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc findutils wget
 
     - name: Compile
+      env:
+        # The runner's CMake 4 refuses projects that ask for CMake < 3.5 (buildroot 2024.02's hiredis does).
+        CMAKE_POLICY_VERSION_MINIMUM: '3.5'
       run: |
         cd ./buildroot
         export BR2_EXTERNAL=byondvm
