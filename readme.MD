@@ -7,7 +7,10 @@ This repo contains the buildroot configuration files to create the iso used in d
 4. run `make defconfig byondvm_defconfig BR2_EXTERNAL=byondvm`
 5. run `make -j<cpu cores>`
 6. run `make -j<cpu cores>` again (this one is short, it's because of bugs with experimental buildroot features im using(parallel building))
-7. iso is in output/images
+7. images are in output/images
+
+## Outputs
+The playground downloads `bzImage` and `rootfs.cpio.zst` from GitHub Pages and unpacks the initrd in the browser.
 
 
 ## Note
