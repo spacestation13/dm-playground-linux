@@ -31,7 +31,8 @@ jobs:
         wget https://buildroot.org/downloads/buildroot-2026.02.3.tar.gz
         tar -xzf ./buildroot-2026.02.3.tar.gz
         mv -v ./buildroot-2026.02.3/ ./buildroot
-        mv -v ./byondvm ./buildroot/byondvm
+        # A symlink, not a move: checkout's push credentials only apply to the directory it checked out into.
+        ln -s ../byondvm ./buildroot/byondvm
 
     - name: Setup Buildroot
       run: |
@@ -53,13 +54,13 @@ jobs:
     - name: Set current date as env variable
       if: github.event_name == 'push'
       run: |
-        cd ./buildroot/byondvm # Go to the actual repo
+        cd ./byondvm
         echo "HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Push tag
       if: github.event_name == 'push'
       run: |
-        cd ./buildroot/byondvm # Go to the actual repo
+        cd ./byondvm
         git tag ${{ env.HASH }}
         git push origin --tags
 
